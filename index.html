@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Danat Pay</title>
+
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #120d0a;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    .app {
+      max-width: 480px;
+      margin: auto;
+      padding: 18px 16px 100px;
+    }
+
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    .fire {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: #ff5a00;
+      display: grid;
+      place-items: center;
+      font-size: 25px;
+    }
+
+    .lang {
+      background: #2a211c;
+      padding: 9px 13px;
+      border-radius: 20px;
+    }
+
+    .balance {
+      padding: 24px;
+      border-radius: 25px;
+      background: linear-gradient(135deg, #251812, #8b2d08);
+      margin-bottom: 18px;
+    }
+
+    .small {
+      opacity: 0.75;
+      font-size: 14px;
+    }
+
+    .money {
+      font-size: 38px;
+      font-weight: bold;
+      margin: 8px 0 18px;
+    }
+
+    button {
+      border: none;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .deposit {
+      background: white;
+      color: #1d1713;
+      border-radius: 14px;
+      padding: 14px 22px;
+    }
+
+    .card {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      background: #241b16;
+      border-radius: 20px;
+      padding: 18px;
+      margin: 12px 0;
+      border: 1px solid #32251e;
+    }
+
+    .icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 15px;
+      background: #38271e;
+      display: grid;
+      place-items: center;
+      font-size: 25px;
+    }
+
+    .arrow {
+      margin-left: auto;
+      font-size: 26px;
+      opacity: 0.6;
+    }
+
+    h2 {
+      margin: 28px 0 14px;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .product {
+      background: #211914;
+      border-radius: 18px;
+      padding: 12px;
+      text-align: center;
+      border: 1px solid #30241d;
+    }
+
+    .pic {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .product b {
+      font-size: 14px;
+    }
+
+    .price {
+      font-size: 12px;
+      color: #cfc2b8;
+      margin-top: 8px;
+    }
+
+    .nav {
+      position: fixed;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 94%;
+      max-width: 450px;
+      background: #211a16;
+      border: 1px solid #3a2d25;
+      border-radius: 25px;
+      display: flex;
+      justify-content: space-around;
+      padding: 12px 5px;
+    }
+
+    .nav div {
+      text-align: center;
+      font-size: 12px;
+      color: #b9aaa0;
+    }
+
+    .nav span {
+      display: block;
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+
+    .active {
+      color: #ff5a00 !important;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <div class="top">
+    <div class="logo">
+      <div class="fire">🎁</div>
+      Danat Pay
+    </div>
+
+    <div class="lang">UZ</div>
+  </div>
+
+
+  <div class="balance">
+
+    <div class="small">
+      Balansingiz
+    </div>
+
+    <div class="money">
+      0 so'm
+    </div>
+
+    <button class="deposit" onclick="deposit()">
+      ＋ To‘ldirish
+    </button>
+
+  </div>
+
+
+  <div class="card" onclick="shop()">
+
+    <div class="icon">🎁</div>
+
+    <div>
+      <b>Do‘konni ochish</b>
+      <div class="small">
+        O‘yinlar va Telegram xizmatlari
+      </div>
+    </div>
+
+    <div class="arrow">›</div>
+
+  </div>
+
+
+  <div class="card" onclick="deposit()">
+
+    <div class="icon">💳</div>
+
+    <div>
+      <b>Balansni to‘ldirish</b>
+      <div class="small">
+        To‘lov usulini tanlang
+      </div>
+    </div>
+
+    <div class="arrow">›</div>
+
+  </div>
+
+
+  <h2>
+    Ommabop mahsulotlar
+  </h2>
+
+
+  <div class="products">
+
+    <div class="product"
+         onclick="buy('Free Fire')">
+
+      <div class="pic">🔥</div>
+
+      <b>Free Fire</b>
+
+      <div class="price">
+        3 300 so'm dan
+      </div>
+
+    </div>
+
+
+    <div class="product"
+         onclick="buy('Mobile Legends')">
+
+      <div class="pic">⚔️</div>
+
+      <b>Mobile Legends</b>
+
+      <div class="price">
+        1 200 so'm dan
+      </div>
+
+    </div>
+
+
+    <div class="product"
+         onclick="buy('Telegram Stars')">
+
+      <div class="pic">⭐</div>
+
+      <b>Telegram Stars</b>
+
+      <div class="price">
+        10 000 so'm dan
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <h2>
+    Yordam
+  </h2>
+
+
+  <div class="card" onclick="help()">
+
+    <div class="icon">
+      🎧
+    </div>
+
+    <div>
+      <b>Yordam kerakmi?</b>
+
+      <div class="small">
+        Qo‘llab-quvvatlash
+      </div>
+    </div>
+
+    <div class="arrow">
+      ›
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="nav">
+
+  <div class="active">
+    <span>⌂</span>
+    Asosiy
+  </div>
+
+  <div onclick="shop()">
+    <span>🎁</span>
+    Do‘kon
+  </div>
+
+  <div>
+    <span>◷</span>
+    Tarix
+  </div>
+
+  <div>
+    <span>♙</span>
+    Profil
+  </div>
+
+</div>
+
+
+<script>
+
+const tg = window.Telegram?.WebApp;
+
+if (tg) {
+  tg.ready();
+  tg.expand();
+}
+
+
+function deposit() {
+
+  alert("Balansni to‘ldirish bo‘limi");
+
+}
+
+
+function shop() {
+
+  alert("Do‘kon bo‘limi");
+
+}
+
+
+function buy(name) {
+
+  alert(
+    name + " tanlandi!"
+  );
+
+}
+
+
+function help() {
+
+  alert(
+    "Yordam uchun Telegram bot operatoriga murojaat qiling."
+  );
+
+}
+
+</script>
+
+</body>
+  </html>
